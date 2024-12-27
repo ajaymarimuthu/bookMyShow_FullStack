@@ -68,3 +68,30 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+####   Book My Show
+
+when a person login the app. they should be taken to homepage.
+if they refresh the homepage should be retained
+
+  server gives us a token 
+
+  So client says whenever i show you this token, server says i will let you in
+
+
+
+  ### JWT - Json Web Token
+
+  Token from jwt. 
+  I need to verify if it is a valid token or not.
+  and based on this verification i let the user in.
+
+  i would have to create a route/get-user-info 
+
+  WHen to create this ROUTE?
+   Everytime before anything id done do an api call to get the user information
+
+   
+

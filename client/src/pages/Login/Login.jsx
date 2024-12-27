@@ -1,10 +1,45 @@
 import React from 'react';
 import { Button, Form, Input } from 'antd';
+import { LoginUser } from '../../api/users';
+// import { useEffect } from 'react';
+// import { useNavigate } from "react-router-dom";
+// import { message } from "antd";
+
 function Login() {
 //   const navigate = useNavigate();
   const onFinish = async (values) => {
-     
+    try {
+      const response = await LoginUser(values);
+
+      console.log('ressss', response);
+      if(response.success){
+        localStorage.setItem('token', response.token);
+      }
+      else {
+        console.log(response.message);
+        // message.error(response.message);
+      }
+      
+      
+    // //   if (response.success) {
+    // //     localStorage.setItem('token', response.token);
+    // //     window.location.href = '/';
+    // //     console.log(response);
+    //     message.success("user Logged in")
+    //   } else {
+    //     console.log(response.message);
+    //     message.error(response.message);
+    //   }
+    } catch (error) {
+      console.log(error);
+    }
   }
+
+//   useEffect(() => {
+//     if (localStorage.getItem('token')) {
+//       navigate("/");
+//     }
+//   }, []);
 
 
   return (
@@ -66,3 +101,18 @@ function Login() {
 
 export default Login;
 
+
+// 1) Protect the route for home page 
+// 2) If user is logged in only then the route for homepage should be accessible
+// 3) don't show login page again if the user is logged in 
+// 4) check the token in the local storage
+// 5) Add a check in login page for local storage token 
+// 6) If token exists take the user to home page 
+// 7) Else ask the user to login 
+// 8) The route for home page should be protected
+// 9) Check if they have a valid token or not and let them go to home page
+// 10) Else take them to the login page 
+// 11) How to check for validity of the token?
+// 12) Api call to the backend to check the token for its validity 
+// 13) If the backend says all well 
+// 14) Let the user in or let them login 

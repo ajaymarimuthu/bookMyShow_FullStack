@@ -235,3 +235,19 @@ while signup:
 4. if user and pwd matches then login
 
 
+
+  ### JWT - Json Web Token
+
+  Token from jwt. 
+  I need to verify if it is a valid token or not.
+  and based on this verification i let the user in.
+
+  i would have to create a route/get-user-info 
+
+  WHen to create this ROUTE?
+   Everytime before anything id done do an api call to get the user information
+
+   
+
+
+

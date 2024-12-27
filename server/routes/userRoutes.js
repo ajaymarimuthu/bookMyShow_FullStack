@@ -2,6 +2,7 @@ const express = require('express');
 const User = require('../models/userModel');
 const router = express.Router();
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 router.post('/register', async (req, res) => {
 
@@ -69,9 +70,14 @@ router.post('/login',async(req,res)=>{
             })
             return;
         }
+
+        // while logging in we need to create a token and send to client
+        // jwt.sign({id}, PrivateKey , expiringDate);
+        const token =jwt.sign({userId: userExists._id}, "ajay_bms", {expiresIn: "1d"})
         res.send({
             success: true,
-            message: 'Logged In'
+            message: 'Logged In',
+            token: token
         })
 
 
