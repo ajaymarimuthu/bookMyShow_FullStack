@@ -1,0 +1,237 @@
+
+
+BE-GUIDE
+
+NOdejs
+
+BE:
+what is BE and server and how can i categorize
+
+1.) Frontend.2.) Backend 3.) Database
+
+when you hit a www.google.com a dns lookup happens and a ip address for a server is returned and then the client hit this ip address to get the webpage.
+
+what is the server?
+
+client =====request==>>> --------<<<response----server ===>>> Database
+
+1.) client asks for a HTLML page and server response with HTML page.
+
+2.) client ask for a json data and server fetched this data from databse and manipulates this data and returns the client.
+
+Server gets the request
+server responsds to a request
+server connect tpo a database
+
+Server is very prowerful machine.
+On a server you would run backend language like
+1.) jav1, python, node, ruby, go, c#, PHP
+
+This backend language proive you with a way to connect to databse .
+
+Scenario:
+you need to serve 100 users.
+And 1 machine can serve 32 users.
+So may server we need?
+ANSWER: 4 SERVERS.
+
+we can increase/decrease the number of servers based on the user count
+
+#### --- CDN
+
+Content delivery network.
+
+Cloudfront
+Akamai
+cloudfare
+
+User => google.com => server for scalar would be hit => html returned
+
+server for google is in U.S.A
+
+CDN tell you that we have placed our server across the globe and they call it edge servers.
+
+JS, CSS, images could keep these in our server.
+
+CDN - can serve these assets and the servers which are closest to the end user would serve these assets.
+
+### Nodejs
+
+itis written in js
+js is built on event loop driven architecture.
+
+JS is single threaded.
+Event looop make sure tthat your single thread is never blocked and async things happen in event loop
+Node js can process multiple requests because of event loop leading to nodejs being stable and scalable.
+
+### EXPRESS
+
+IT is a framwork on top of nodejs which proivdes you with ease to do thing over nodejs
+
+To run a nodejs file.
+
+# ===========================================================================================================================================
+
+# Day 2
+
+Api is used to communcicate between the server and client
+Api return data in json format
+
+who has these API's ? a server has these api's ans it returns these api's to the end user based on the end user.
+
+Is the particular url is hit then the server need to recognize the request accept it and responds to the request with required data.
+
+To route it to any pages we can check in the req.url about the route and we can show the desired resluts
+
+
+### HTTP METHODS:
+GET  - read data
+POST  - WRITE THE data
+PUT  - UPDATE data
+DELETE  - DELETE data
+
+
+
+### MIDDLEWARE
+
+Middleware has access to request, response object and a next fucntion.
+
+### app.use(middlware) need to be added.
+
+if we add a middleware we need to make our middlware to move forward by calling the NEXT() function.
+
+
+
+
+### DATABASE
+1. RELATIONAL DB
+2. non - RELATIONAL DB
+
+
+In a DB multiple tables are created and join with each other to get results
+
+
+### NO sql
+
+### MONGODB
+
+THE DATA that are going to store in json format in mongodb.
+we will be having documents in json format like below. 
+
+### DOCUMENT
+{
+    id:1,
+    name: 'ajay'
+}
+
+THE collections of these documents are known as COLLECTIONS.
+
+when you need flexibility in order to store unstructured data mongo or nosql is the best option
+
+### REASON:
+LETS TAKE SOCIAL MEDIA 
+ FOR A POST WE HAVE MILLIONS/ TRILLIONS OF LIKE , COMMENTS TO GET THE DETAILS OF IT IN A RELATIONAL DATABSE(LIKE SQL) IT IS VERY TOUGH TO FETCH THEM .
+### bUT IN NOSQL- MONGODB
+WE ARE STORING IN KEY, VALUE PAIR SO WE CAN ESILUYT FETCH THEM.
+
+
+
+connection: mongodb+srv://ajay:<db_password>@cluster0.vvtgj.mongodb.net/
+
+Replace <db_password> with the password for the ajay user. Ensure any options are URL encoded.  You can edit your database user password in Database Access. 
+
+
+MongoDb can be used independently. 
+Mongoose in order to use MongoDB because mongodb has lot of boilerplatecode
+
+Mongoose gives us a way ti specify a schema . It helps you add validations to your data. And it makes much easier to save and update your data.
+
+
+Mongoose suggests that there are two important steps in order to use it.
+1.) you need to connect to a database
+2.) create a schema 
+3.) create a model out of that schame
+4.) the model would interact with the database
+
+
+Create a schema: It is just a Blueprint  for your data
+
+### import mongoose from 'mongoose';
+###  const { Schema } = mongoose;
+
+###  const blogSchema = new Schema({
+  ### title: String, // String is shorthand for {type: String}
+  ### author: String,
+  ### body: String,
+  ### comments: [{ body: String, date: Date }],
+  ### date: { type: Date, default: Date.now },
+  ### hidden: Boolean,
+  ### meta: {
+   ###  votes: Number,
+   ###   favs: Number
+  ### }
+###  });
+
+To use our schema definition, we need to convert our blogSchema into a Model we can work with. To do so, we pass it into mongoose.model(modelName, schema):
+
+const Blog = mongoose.model('Blog', blogSchema);
+
+### Blog vaiable is used to do the CRUD operations
+
+
+
+
+
+### MVC ARCHITECTURE
+
+
+VIEW =>> React application which is seen by user
+
+mODEL = > JOB Of MODEL is to connect with database , fetch the data , process the data and give it to controller
+
+CONTROLLER: ==>> get the req from client , give the request to model and take the processed info and respond with request to client
+
+
+
+
+
+### Authentication
+
+
+sign up:
+ 1. Name
+ 2. Email
+ 3. Pwd
+ 4. isAdmin
+
+while signup: 
+ 1.) No duplicate users should be added.
+ 2.) Password should not be seen by everyone
+
+    ** bcryt is library used to hash password.
+      using SALT
+      Passowrd: 123
+      Sale = salala
+      password+salt = 123salala
+
+
+   Therefore hash(password+salt)... hackers can't hack it
+
+  ### SALT
+  It is a random string , generated everytime a new passwor dis get hashed.
+  salt round () ==> number of times you want to hash the password+ salt in rder to dd complexirty into your hasing so that no one can break your password.
+
+
+  ### encrypt
+  when you encrypt a password you can never decrypt it . You can only compare it 
+
+  ##### --------------------------------------------------
+
+  #### LOGIN
+
+1. check if user exists or not
+2. check pawd if its correct or not 
+3. compare using bcryt method
+4. if user and pwd matches then login
+
+
