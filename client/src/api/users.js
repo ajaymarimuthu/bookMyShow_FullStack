@@ -25,16 +25,12 @@ export const RegisterUser = async(values) =>{
 export const GetCurrentUser = async () =>{
     try{
 
-        const response = await axiosInstance.post('api/users/get-current-user');
+        const response = await axiosInstance.get('api/users/get-current-user');
+        console.log('------------',response);
         return response.data;
-
     }
     catch(err){
-
-        debugger;
-
+        // debugger
         console.log(err);
-        
-
     }
 }

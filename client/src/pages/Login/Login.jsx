@@ -4,6 +4,7 @@ import { LoginUser } from '../../api/users';
 import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 // import { message } from "antd";
+import { message } from 'antd';
 
 function Login() {
   const navigate = useNavigate();
@@ -15,10 +16,11 @@ function Login() {
       if(response.success){
         localStorage.setItem('token', response.token);
         window.location.href="/";
+        message.success("user logged in");
       }
       else {
         console.log(response.message);
-        // message.error(response.message);
+        message.error(response.message);
       }
       
       

@@ -97,10 +97,11 @@ router.post('/login',async(req,res)=>{
 })
 
 
-router.get('/get-current-user', authMiddleware, async(req,res)=>{
+router.get('/get-current-user', authMiddleware , async(req,res)=>{
    // informt the server if the token is valid or not and who the user is
 
    const user = await User.findById(req.body.userId).select("-password");
+   console.log('-------yessssss-----', user)
    res.send({
     success:true,
     message: "You are authorized",
@@ -109,4 +110,16 @@ router.get('/get-current-user', authMiddleware, async(req,res)=>{
     
 }) 
 
+// router.get('/getUsers', async(req,res)=>{
+//     // informt the server if the token is valid or not and who the user is
+ 
+//     const user = await User.find().select("-password");
+//     res.send({
+//      success:true,
+//      message: "You are authorized",
+//      data: user
+//     })
+     
+//  }) 
+ 
 module.exports = router;

@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose')
 const app = express();
 const userRoutes = require('./routes/userRoutes');
+const moveieRoutes = require('./routes/movieRoutes');
+
 require('dotenv').config();
 app.use(express.json())
 
@@ -14,7 +16,7 @@ mongoose.connect(dbURL).then(()=>{
 
 // this line is important for routes
 app.use('/api/users', userRoutes);
-
+app.use('/api/movies', moveieRoutes);
 app.listen(3000, ()=>{
     console.log('Book My show server started-----aaa');    
 })

@@ -1,6 +1,6 @@
 import axios from 'axios'
 export const axiosInstance = axios.create({
-    header:{
+    headers:{
         'content-Type' : 'application/json', 
         'Authorization' : `Bearer ${localStorage.getItem('token')}`       
     }

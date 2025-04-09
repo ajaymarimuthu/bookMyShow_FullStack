@@ -8,7 +8,12 @@ module.exports = function(req,res,next){
     // get the user out of the token 
     // send the user to the fucntion
 
+    console.log('inside middleeeware');
+    
+
     try{
+
+        console.log('inside tryyyyyyyyyyyyyyyyyyyyyyyy');
 
         const token = req.headers.authorization.split(" ")[1];
 
@@ -23,7 +28,7 @@ module.exports = function(req,res,next){
         req.body.userId=verifiedToken.userId;
 
         console.log('verifiedToken-------', verifiedToken)
-
+        console.log('inside lasssssssssttttttttttt');
         next();
 
     }
