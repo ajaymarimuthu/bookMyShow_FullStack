@@ -3,6 +3,7 @@ const User = require('../models/userModel');
 const router = express.Router();
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const authMiddleware = require('../middlewares/authMiddleware');
 
 router.post('/register', async (req, res) => {
 
@@ -62,6 +63,8 @@ router.post('/login',async(req,res)=>{
         //Using bcrypt am comapre databse pwd and user entered pwd
         const validPassword = await bcrypt.compare(req.body.password, userExists.password) ;
 
+        // console.log('userExists._id', userExists._id)
+
         // am checking whether password is not correecttt
         if(!validPassword){
             res.send({
@@ -92,5 +95,18 @@ router.post('/login',async(req,res)=>{
     }
 
 })
+
+
+router.get('/get-current-user', authMiddleware, async(req,res)=>{
+   // informt the server if the token is valid or not and who the user is
+
+   const user = await User.findById(req.body.userId).select("-password");
+   res.send({
+    success:true,
+    message: "You are authorized",
+    data: user
+   })
+    
+}) 
 
 module.exports = router;

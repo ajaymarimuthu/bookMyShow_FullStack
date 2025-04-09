@@ -1,12 +1,12 @@
 import React from 'react';
 import { Button, Form, Input } from 'antd';
 import { LoginUser } from '../../api/users';
-// import { useEffect } from 'react';
-// import { useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 // import { message } from "antd";
 
 function Login() {
-//   const navigate = useNavigate();
+  const navigate = useNavigate();
   const onFinish = async (values) => {
     try {
       const response = await LoginUser(values);
@@ -14,6 +14,7 @@ function Login() {
       console.log('ressss', response);
       if(response.success){
         localStorage.setItem('token', response.token);
+        window.location.href="/";
       }
       else {
         console.log(response.message);
@@ -35,11 +36,11 @@ function Login() {
     }
   }
 
-//   useEffect(() => {
-//     if (localStorage.getItem('token')) {
-//       navigate("/");
-//     }
-//   }, []);
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      navigate("/");
+    }
+  }, []);
 
 
   return (
