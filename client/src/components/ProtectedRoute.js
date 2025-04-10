@@ -1,8 +1,16 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GetCurrentUser } from "../api/users";
-import { message } from 'antd';
+import { message, Menu, Layout } from "antd";
+import { Header } from "antd/es/layout/layout";
+import { Link } from "react-router-dom";
 
+import {
+  HomeOutlined,
+  LogoutOutlined,
+  ProfileOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 
 function ProtectedRoute ({children}){
 
@@ -10,6 +18,40 @@ function ProtectedRoute ({children}){
     // redirecting to login page
     const navigate = useNavigate();
     const [user,setUser] = useState({});
+
+    const navItems = [
+        {
+          label: "Home",
+          icon: <HomeOutlined />,
+        },
+        {
+          label: `${user? user.name : ""}`,
+          icon: <UserOutlined />,
+          children: [
+            {
+              label: (
+                <span
+                  onClick={() => {
+                    user.isAdmin ? navigate("/admin") : navigate("/profile")
+                  }}
+                >
+                  My Profile
+                </span>
+              ),
+              icon: <ProfileOutlined/>
+            },
+            {
+              label: (
+                <Link to="/login" onClick={() => {
+                  localStorage.removeItem("token");
+                }}>Logout</Link>
+              ),
+              icon: <LogoutOutlined />,
+            }
+          ]
+        }
+      ]
+    
 
     const getValidUser = async () =>{
         try{
@@ -36,15 +78,31 @@ function ProtectedRoute ({children}){
 
 
     return(
-
-        <div>
-            <p>ooooo</p>
-            {user?.name}
+        <>
+        <Layout>
+          <Header
+            className="d-flex justify-content-between"
+            style={{
+              position: "sticky",
+              top: 0,
+              zIndex: 1,
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <h3 className="demo-logo text-white m-0" style={{ color: "white" }}>
+              Book My Show
+            </h3>
+            <Menu theme="dark" mode="horizontal" items={navItems} />
+  
+          </Header>
+          <div style={{ padding: 24, minHeight: 380, background: "#fff" }}>
             {children}
-        </div>
-
-
-
+          </div>
+        </Layout>
+        
+      </>
     )
 
 
